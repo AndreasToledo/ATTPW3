@@ -23,9 +23,9 @@ class UserController
             'email' => 'required|string|email|max:255',
         ]);
 
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
+        $user=new User();
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
         $user->save();
         return redirect()->route('users.index')->with('success', 'Usuário cadastrado com sucesso!');
     }
@@ -55,8 +55,8 @@ class UserController
         ]);
 
         $user=User::findOrFail($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
+        $user->name=$request->input('name');
+        $user->email=$request->input('email');
         $user->save();
         return redirect()->route('users.index')->with('success', 'Dados de usuário com sucesso!');
     }

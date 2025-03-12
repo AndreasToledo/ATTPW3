@@ -53,9 +53,9 @@ class ProductController
             'description' => 'nullable|string',
         ]);
 
-        $product = Product::findOrFail($id);
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
+        $product=Product::findOrFail($id);
+        $product->name=$request->input('name');
+        $product->description=$request->input('description');
         $product->save();
 
         return redirect()->route('products.index')->with('success', 'Produto atualizado com sucesso!');
