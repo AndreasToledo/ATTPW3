@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UsuarioController
+class BookController
 {
     public function index()
     {
+        return view('books.index');
     }
     public function create()
     {

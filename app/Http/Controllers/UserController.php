@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProdutoController
+class UserController
 {
     public function index()
     {
+        return view('users.index');
     }
     public function create()
     {
