@@ -112,22 +112,12 @@ class UserController
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $id,
-        ], [
-            'name.required' => 'O nome do usuário é obrigatório!',
-            'email.required' => 'O email do usuário é obrigatório!',
-            'email.email' => 'Informe um email válido!',
-            'email.unique' => 'Este email já está em uso!',
-        ]);
-
         // $user = User::findOrFail($id);
         // $user->name = $request->input('name');
         // $user->email = $request->input('email');
         // $user->save();
 
-        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
+        return redirect()->route('users.index')->with('success', 'Dados de usuário foram atualizadas com sucesso!');
     }
 
     public function destroy($id)
