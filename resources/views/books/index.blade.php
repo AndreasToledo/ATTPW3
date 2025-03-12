@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Livros</h1>
-    <p>Aqui se encontra a lista de livros!</p>
+    <p>Aqui se encontra a lista de livros registrados!</p>
 </body>
 </html>

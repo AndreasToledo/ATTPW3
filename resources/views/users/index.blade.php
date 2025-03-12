@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Usuários</h1>
-    <p>Aqui se encontra a lista de usuários!</p>
+    <p>Aqui se encontra a lista de usuários cadastrados!</p>
 </body>
 </html>

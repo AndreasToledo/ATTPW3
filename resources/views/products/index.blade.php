@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Produtos</h1>
-    <p>Aqui se encontra a lista de produtos!</p>
+    <p>Aqui se encontra a lista de produtos disponíveis!</p>
 </body>
 </html>
