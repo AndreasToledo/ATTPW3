@@ -44,7 +44,7 @@
             </tbody>
         </table>
         <a href="{{ route('books.create') }}" style="display: inline-block; padding: 10px 15px; background-color: green; color: white; text-decoration: none; border-radius: 5px; cursor: pointer;">Adicionar Novo Livro</a>
-        <a href="{{ route('dashboard') }}" style="display: inline-block; padding: 10px 15px; background-color: green; color: white; text-decoration: none; border-radius: 5px; cursor: pointer;">Voltar ao menu</a>
+        <a href="{{ route('dashboard') }}" style="display: inline-block; padding: 10px 15px; background-color: gray; color: white; text-decoration: none; border-radius: 5px; cursor: pointer;">Voltar ao menu</a>
     </main>
 </body>
 </html>

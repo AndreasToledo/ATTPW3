@@ -8,63 +8,152 @@ class UserController
 {
     public function index()
     {
-        return view('users.index');
+        $users = [
+            [
+                'id' => 1,
+                'name' => 'João Silva',
+                'email' => 'joao.silva@example.com',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Maria Oliveira',
+                'email' => 'maria.oliveira@example.com',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Carlos Santos',
+                'email' => 'carlos.santos@example.com',
+            ],
+        ];
+
+        return view('users.index', compact('users'));
     }
-    
+
     public function create()
     {
         return view('users.create');
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|email|max:255|unique:users',
+        ], [
+            'name.required' => 'O nome do usuário é obrigatório!',
+            'email.required' => 'O email do usuário é obrigatório!',
+            'email.email' => 'Informe um email válido!',
+            'email.unique' => 'Este email já está em uso!',
         ]);
 
-        $user=new User();
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->save();
-        return redirect()->route('users.index')->with('success', 'Usuário cadastrado com sucesso!');
+        // $user = new User();
+        // $user->name = $request->input('name');
+        // $user->email = $request->input('email');
+        // $user->save();
+
+        return redirect()->route('users.index')->with('success', 'Usuário registrado com sucesso!');
     }
-    
-    public function show(string $id)
+
+    public function show($id)
     {
-        $user=User::findOrFail($id);
+        $users = [
+            1 => [
+                'id' => 1,
+                'name' => 'João Silva',
+                'email' => 'joao.silva@example.com',
+            ],
+            2 => [
+                'id' => 2,
+                'name' => 'Maria Oliveira',
+                'email' => 'maria.oliveira@example.com',
+            ],
+            3 => [
+                'id' => 3,
+                'name' => 'Carlos Santos',
+                'email' => 'carlos.santos@example.com',
+            ],
+        ];
+
+        if (!isset($users[$id])) {
+            abort(404, 'Usuário não encontrado.');
+        }
+
+        $user = $users[$id];
         return view('users.show', compact('user'));
     }
-    
-    public function edit(string $id)
+
+    public function edit($id)
     {
-        $user=User::findOrFail($id);
+        $users = [
+            1 => [
+                'id' => 1,
+                'name' => 'João Silva',
+                'email' => 'joao.silva@example.com',
+            ],
+            2 => [
+                'id' => 2,
+                'name' => 'Maria Oliveira',
+                'email' => 'maria.oliveira@example.com',
+            ],
+            3 => [
+                'id' => 3,
+                'name' => 'Carlos Santos',
+                'email' => 'carlos.santos@example.com',
+            ],
+        ];
+
+        if (!isset($users[$id])) {
+            abort(404, 'Usuário não encontrado.');
+        }
+
+        $user = $users[$id];
         return view('users.edit', compact('user'));
     }
-    
-    public function update(Request $request, string $id)
+
+    public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
         ], [
-            'name.required' => 'O nome da pessoa é obrigatório.',
-            'name.max' => 'O nome não pode ter mais que 255 caracteres.',
-            'email.required' => 'O email do usuário é obrigatório.',
-            'email.max' => 'O email do usuário é muito longo.'
+            'name.required' => 'O nome do usuário é obrigatório!',
+            'email.required' => 'O email do usuário é obrigatório!',
+            'email.email' => 'Informe um email válido!',
+            'email.unique' => 'Este email já está em uso!',
         ]);
 
-        $user=User::findOrFail($id);
-        $user->name=$request->input('name');
-        $user->email=$request->input('email');
-        $user->save();
-        return redirect()->route('users.index')->with('success', 'Dados de usuário com sucesso!');
+        // $user = User::findOrFail($id);
+        // $user->name = $request->input('name');
+        // $user->email = $request->input('email');
+        // $user->save();
+
+        return redirect()->route('users.index')->with('success', 'Usuário atualizado com sucesso!');
     }
-    
-    public function destroy(string $id)
+
+    public function destroy($id)
     {
-        $user=User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('users.index')->with('success', 'Usuário deletado com sucesso!');
+        $users = [
+            1 => [
+                'id' => 1,
+                'name' => 'João Silva',
+                'email' => 'joao.silva@gmail.com',
+            ],
+            2 => [
+                'id' => 2,
+                'name' => 'Maria Oliveira',
+                'email' => 'maria.oliveira@gmail.com',
+            ],
+            3 => [
+                'id' => 3,
+                'name' => 'Carlos Santos',
+                'email' => 'carlos.santos@gmail.com',
+            ],
+        ];
+
+        if (!isset($users[$id])) {
+            return redirect()->route('users.index')->with('error', 'Usuário não encontrado!');
+        }
+
+        return redirect()->route('users.index')->with('success', 'Usuário excluído com sucesso!');
     }
 }
