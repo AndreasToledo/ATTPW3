@@ -67,7 +67,7 @@ class BookController extends Controller
         //$book->published_date=$request->input('published_date');
         //$book->pages = $request->input('pages');
         //$book->genre = $request->input('genre');
-        //$book->save();
+        //book->save();
 
         return redirect()->route('books.index')->with('success', 'Livro registrado com sucesso!');
     }
