@@ -27,9 +27,9 @@
             <tbody>
                 @foreach ($users as $user)
                 <tr>
-                    <td style="padding: 10px;">{{ $user['id'] }}</td>
-                    <td style="padding: 10px;">{{ $user['name'] }}</td>
-                    <td style="padding: 10px;">{{ $user['email'] }}</td>
+                    <td style="padding: 10px;">{{ $user->id }}</td>
+                    <td style="padding: 10px;">{{ $user->name }}</td>
+                    <td style="padding: 10px;">{{ $user->email }}</td>
                     <td style="padding: 10px;">
                         <a href="{{ route('users.show', $user['id']) }}" style="padding: 10px; background-color: blue; color: white; text-decoration: none; border-radius: 5px;">Ver</a>
                         <a href="{{ route('users.edit', $user['id']) }}" style="padding: 10px; background-color: orange; color: white; text-decoration: none; border-radius: 5px;">Editar</a>
