@@ -20,18 +20,18 @@
             </div>
         @endif
 
-        <form action="{{ route('products.update', $product['id']) }}" method="POST">
+        <form action="{{ route('products.update', $products->id) }}" method="POST">
             @csrf
             @method('PUT')
 
             <div style="margin-bottom: 15px;">
                 <label for="name">Nome do Produto:</label><br>
-                <input type="text" id="name" name="name" value="{{ $product['name'] }}" required style="width: 100%; padding: 10px; margin-top: 5px;">
+                <input type="text" id="name" name="name" value="{{ $products->name }}" required style="width: 100%; padding: 10px; margin-top: 5px;">
             </div>
 
             <div style="margin-bottom: 15px;">
                 <label for="price">Preço (R$):</label><br>
-                <input type="number" id="price" name="price" step="0.01" value="{{ $product['price'] }}" required style="width: 100%; padding: 10px; margin-top: 5px;">
+                <input type="number" id="price" name="price" step="0.01" value="{{ $products->price }}" required style="width: 100%; padding: 10px; margin-top: 5px;">
             </div>
 
             <button type="submit" style="padding: 10px 15px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 10px;">Salvar Alterações</button>

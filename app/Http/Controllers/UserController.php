@@ -3,29 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = [
-            [
-                'id' => 1,
-                'name' => 'João Silva',
-                'email' => 'joao.silva@example.com',
-            ],
-            [
-                'id' => 2,
-                'name' => 'Maria Oliveira',
-                'email' => 'maria.oliveira@example.com',
-            ],
-            [
-                'id' => 3,
-                'name' => 'Carlos Santos',
-                'email' => 'carlos.santos@example.com',
-            ],
-        ];
-
+        $users = User::All();
         return view('users.index', compact('users'));
     }
 
@@ -46,103 +30,44 @@ class UserController extends Controller
             'email.unique' => 'Este email já está em uso!',
         ]);
 
-        // $user = new User();
-        // $user->name = $request->input('name');
-        // $user->email = $request->input('email');
-        // $user->save();
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
 
         return redirect()->route('users.index')->with('success', 'Usuário registrado com sucesso!');
     }
 
     public function show($id)
     {
-        $users = [
-            1 => [
-                'id' => 1,
-                'name' => 'João Silva',
-                'email' => 'joao.silva@example.com',
-            ],
-            2 => [
-                'id' => 2,
-                'name' => 'Maria Oliveira',
-                'email' => 'maria.oliveira@example.com',
-            ],
-            3 => [
-                'id' => 3,
-                'name' => 'Carlos Santos',
-                'email' => 'carlos.santos@example.com',
-            ],
-        ];
+        $users = User::findOrFail($id);
 
-        if (!isset($users[$id])) {
-            abort(404, 'Usuário não encontrado.');
-        }
-
-        $user = $users[$id];
-        return view('users.show', compact('user'));
+        return view('users.show', compact('users'));
     }
 
     public function edit($id)
     {
-        $users = [
-            1 => [
-                'id' => 1,
-                'name' => 'João Silva',
-                'email' => 'joao.silva@example.com',
-            ],
-            2 => [
-                'id' => 2,
-                'name' => 'Maria Oliveira',
-                'email' => 'maria.oliveira@example.com',
-            ],
-            3 => [
-                'id' => 3,
-                'name' => 'Carlos Santos',
-                'email' => 'carlos.santos@example.com',
-            ],
-        ];
-
-        if (!isset($users[$id])) {
-            abort(404, 'Usuário não encontrado.');
-        }
-
-        $user = $users[$id];
+        $user = User::findOrFail($id); 
         return view('users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
-        // $user = User::findOrFail($id);
-        // $user->name = $request->input('name');
-        // $user->email = $request->input('email');
-        // $user->save();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $user = User::find($id);
+        $user->update($request->all());
 
         return redirect()->route('users.index')->with('success', 'Dados de usuário foram atualizadas com sucesso!');
     }
 
     public function destroy($id)
     {
-        $users = [
-            1 => [
-                'id' => 1,
-                'name' => 'João Silva',
-                'email' => 'joao.silva@gmail.com',
-            ],
-            2 => [
-                'id' => 2,
-                'name' => 'Maria Oliveira',
-                'email' => 'maria.oliveira@gmail.com',
-            ],
-            3 => [
-                'id' => 3,
-                'name' => 'Carlos Santos',
-                'email' => 'carlos.santos@gmail.com',
-            ],
-        ];
-
-        if (!isset($users[$id])) {
-            return redirect()->route('users.index')->with('error', 'Usuário não encontrado!');
-        }
+        $user = User::findOrFail($id);
+        $user->delete();
 
         return redirect()->route('users.index')->with('success', 'Usuário excluído com sucesso!');
     }

@@ -10,19 +10,19 @@
         <h1>Detalhes do Produto</h1>
     </header>
     <main>
-        @if($product)
+        @if($products)
             <table>
                 <tr>
                     <th style="padding: 10px; text-align: left;">ID:</th>
-                    <td style="padding: 10px;">{{ $product['id'] }}</td>
+                    <td style="padding: 10px;">{{ $products->id }}</td>
                 </tr>
                 <tr>
                     <th style="padding: 10px; text-align: left;">Nome:</th>
-                    <td style="padding: 10px;">{{ $product['name'] }}</td>
+                    <td style="padding: 10px;">{{ $products->name }}</td>
                 </tr>
                 <tr>
                     <th style="padding: 10px; text-align: left;">Preço:</th>
-                    <td style="padding: 10px;">R$ {{ number_format($product['price'], 2, ',', '.') }}</td>
+                    <td style="padding: 10px;">R$ {{ number_format($products->price, 2, ',', '.') }}</td>
                 </tr>
             </table>
         @else

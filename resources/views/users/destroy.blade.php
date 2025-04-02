@@ -11,7 +11,7 @@
     </header>
     <main>
         <p>Tem certeza de que deseja excluir o usuário <strong>{{ $user['name'] }}</strong>?</p>
-        <form action="{{ route('users.destroy', $user['id']) }}" method="POST">
+        <form action="{{ route('users.destroy', $users->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit">Sim, excluir</button>

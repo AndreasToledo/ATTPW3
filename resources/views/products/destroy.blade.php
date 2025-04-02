@@ -10,8 +10,8 @@
         <h1>Confirmar Exclusão</h1>
     </header>
     <main>
-        <p>Tem certeza de que deseja excluir o produto <strong>{{ $product['name'] }}</strong>?</p>
-        <form action="{{ route('products.destroy', $product['id']) }}" method="POST">
+        <p>Tem certeza de que deseja excluir o produto <strong>{{ $products->name }}</strong>?</p>
+        <form action="{{ route('products.destroy', $products->id) }}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit">Sim, excluir</button>
